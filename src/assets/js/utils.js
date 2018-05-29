@@ -171,27 +171,6 @@ export function simpleClone(state) {
     copy[attr] = state[attr];
   }
   return copy;
-};
-
-export function renderTags(tags, max = 5) {
-
-  function render(name) {
-    return `<span class="chip--small chip"><span class="chip__content">${name}</span></span>`
-  }
-  let ts = [];
-  if (tags.length > max) {
-    ts = tags.slice(0, max)
-    ts.push({
-      name : '...'
-    })
-  } else  {
-    ts = tags;
-  }
-
-
-  let t = ts.map(tag => render(tag.name)).join('');
-
-  return `<strong>${t}</strong>`;
 }
 
 

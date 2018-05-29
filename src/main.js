@@ -2,16 +2,20 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import App from './App';
 import router from './router';
+import {Storage} from './assets/js/utils'
+import store from './store'
 
 require('./assets/js/request');
 
 
 Vue.config.productionTip = false;
 
+Vue.use(Storage)
 /* eslint-disable no-new */
 new Vue({
   el        : '#app',
   router,
   components: {App},
-  template  : '<App/>'
+  template  : '<App/>',
+  store
 });
