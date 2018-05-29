@@ -1,6 +1,7 @@
 import interceptor from '../assets/js/routerInterceptor';
 import Dashboard from '../pages/dashboard/Index';
 import Index from '../pages/Index';
+import Test from '../pages/Test';
 
 
 const router = new VueRouter({
@@ -18,6 +19,11 @@ const router = new VueRouter({
           }
         }
       ]
+    },
+    {
+      path     : '/test',
+      name     : 'test',
+      component : Test
     }
   ]
 });
