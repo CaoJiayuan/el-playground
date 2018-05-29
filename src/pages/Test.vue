@@ -1,5 +1,5 @@
 <template>
-<el-button v-theme="{name: 'red', type : 'button'}">test</el-button>
+<el-button v-theme="red">test</el-button>
 </template>
 
 <script>
