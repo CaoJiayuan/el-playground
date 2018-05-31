@@ -1,0 +1,21 @@
+@import "vars"
+*
+  margin: 0
+  padding: 0
+
+#content
+  min-height: 100vh
+  .el-menu
+    background-color: transparent !important
+  &.fixed-aside
+    #main
+      margin-left: $aside-width
+      height: calc(100vh - 61px)
+      border-top-left-radius: 10px
+      box-shadow: -1px -1px 20px rgba(127, 127, 127, 0.3)
+      z-index: 1
+    .app-aside
+      height: 100%
+      position: fixed
+      .el-menu
+        height: 100%

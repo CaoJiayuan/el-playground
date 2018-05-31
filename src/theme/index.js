@@ -1,15 +1,31 @@
+import red from './red'
+
 const themes = {
-  red : {
+  "default" : {
     items: {
-      button : {
-        class: 'theme-red',
+      "default" : {
+        class: 'theme-default',
         style : {
-          backgroundColor : '#ff6a60'
+          backgroundColor : '#fafafa'
         }
+      },
+      content: {
+        style : {
+          backgroundColor : '#fafafa'
+        }
+      },
+      main: {
+        style : {
+          backgroundColor : '#ffffff'
+        }
+      },
+      aside:{
+        class: 'theme-default-aside'
       }
     },
-    color: 'red'
-  }
+    color: '#eeeeee'
+  },
+  red
 }
 
 
