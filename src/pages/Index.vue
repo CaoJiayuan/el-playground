@@ -5,30 +5,24 @@
         <h2>A vue admin</h2>
       </div>
       <el-menu mode="horizontal">
-        <el-menu-item index="1">处理中心</el-menu-item>
         <el-submenu index="2">
-          <template slot="title">我的工作台</template>
-          <el-menu-item index="2-1">选项1</el-menu-item>
+          <template slot="title">个人中心</template>
+          <el-menu-item index="2-1">修改密码</el-menu-item>
           <el-menu-item index="2-2">选项2</el-menu-item>
           <el-menu-item index="2-3">选项3</el-menu-item>
-          <el-submenu index="2-4">
-            <template slot="title">选项4</template>
-            <el-menu-item index="2-4-1">选项1</el-menu-item>
-            <el-menu-item index="2-4-2">选项2</el-menu-item>
-            <el-menu-item index="2-4-3">选项3</el-menu-item>
-          </el-submenu>
         </el-submenu>
+        <el-menu-item index="1">处理中心</el-menu-item>
         <el-menu-item index="3">消息中心</el-menu-item>
         <el-menu-item index="4">订单管理</el-menu-item>
       </el-menu>
       <div class="theme" style="right: 20px;position: absolute;top: 13px;">
-        <el-button circle style="background: red" @click="applyTheme('red')"></el-button>
-        <el-button circle style="background: grey" @click="applyTheme('default')"></el-button>
+        <el-button circle style="background: red" ></el-button>
+        <el-button circle style="background: grey" ></el-button>
       </div>
     </div>
 
     <el-aside class="app-aside" width="240px" slot="aside">
-      <el-menu v-theme="menu" router :default-active="$route.path">
+      <el-menu  router :default-active="$route.path">
         <el-menu-item index="/" route="/"><i class="el-icon-menu"></i>首页</el-menu-item>
         <el-menu-item index="/accounts" route="/accounts"><i class="el-icon-star-on"></i>用户</el-menu-item>
         <el-submenu index="1">

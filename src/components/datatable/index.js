@@ -7,6 +7,15 @@ export default {
     headers: {
       type: Array,
       default: () => []
+    },
+    actions: {
+      type: Array,
+      default: () => []
+    },
+    selectable: Boolean,
+    value: {
+      type: Array,
+      default: () => []
     }
   },
   mixins: [pagination],
@@ -19,14 +28,17 @@ export default {
     const table = h('el-table', {
       props: {
         data: this.paginator.data,
-        stripe: true,
+        stripe: true
+      },
+      on: {
+        'selection-change': selections => this.$emit('input', selections)
       },
       style: {
         width: '100%'
       }
     }, [this.renderRows(h)])
 
-    const pager = h('el-pagination', {
+    let pager = h('el-pagination', {
       props: {
         background: true,
         pageSize: this.pageSize,
@@ -48,30 +60,95 @@ export default {
   },
   methods: {
     renderRows (h) {
-      return this.headers.map(header => {
+      let row = this.headers.map(header => {
         return h('el-table-column', {
           props: {
             prop: header.id,
             label: header.label,
             align: header.align || 'center',
-            width: header.width
+            width: header.width,
+            fixed: header.fixed,
+            minWidth: header.minWidth,
+
           },
           scopedSlots: {
-            default: props => this.callRenderCellFunction(header.render, props.row, header.id, h)
+            default: props => this.callRenderCellFunction(header, props.row, header.id, h)
           },
         })
       })
-    },
-    callRenderCellFunction (render, row, id, createElement) {
+      if (this.actions.length > 0) {
+        row.push(this.renderActions(h))
+      }
+      if (this.selectable) {
+        row.unshift(h('el-table-column', {
+          props: {
+            type: 'selection',
+            width: 32
+          }
+        }))
+      }
 
-      let defaultRender = (r, i, h) => h('div', row[id])
+      return row
+    },
+    renderActions (h) {
+      return h('el-table-column', {
+        props: {
+          minWidth: 180,
+          label: '操作',
+          align: 'center',
+          fixed: 'right'
+        },
+        scopedSlots: {
+          default: props => {
+            let row = props.row
+            let acts = this.actions.map(action => {
+              return this.showAction(action, row) ? h('el-button', {
+                props: {
+                  size: action.size || 'mini',
+                  type: action.type,
+                  circle: action.circle,
+                  icon: action.icon,
+                  plain: action.plain,
+                },
+                on: {
+                  click: e => {
+                    this.callParentMethod(action.click, row)
+                  }
+                }
+              }, action.label) : h('div')
+            })
+            return acts
+          }
+        },
+      })
+    },
+    showAction (action, row) {
+      if (action.show !== undefined) {
+        return this.callParentMethod(action.show, row)
+      }
+
+      return true
+    },
+    callRenderCellFunction (header, row, id, createElement) {
+      let on = header.click ? {
+        click: e => {
+          this.callParentMethod(header.click, row[id], row, e)
+        }
+      } : {}
+      let render = header.render
+      let defaultRender = (r, i, h) => h('div', {
+        on
+      }, row[id])
 
       if (render === undefined) {
         return defaultRender(row, id, createElement)
       } else {
         let parentMethod = this.getParentMethod(render)
-        if (parentMethod) {
-          return parentMethod.call(this.$parent, row[id], row, createElement)
+        if (parentMethod && typeof parentMethod === 'function') {
+          let el = parentMethod.call(this.$parent, row[id], row, createElement)
+          return createElement('div', {
+            on
+          }, [el])
         } else {
           return defaultRender(row, id, createElement)
         }
@@ -79,7 +156,7 @@ export default {
     },
     callParentMethod (method, ...args) {
       let m = this.getParentMethod(method)
-      if (m) {
+      if (m && typeof m === 'function') {
         return m.call(this.$parent, ...args)
       }
       return m
@@ -91,25 +168,29 @@ export default {
       if (typeof method === 'function') {
         return method
       }
+      if (typeof method === 'boolean') {
+        return method
+      }
+      let findingDepth = 0
 
-      return this.findParentMethod(method, this.$parent, 4)
+      return this.findParentMethod(method, this.$parent, 4, findingDepth)
     },
-    findParentMethod (method, $parent, deep = 3) {
+    findParentMethod (method, $parent, deep = 3, findingDepth = 0) {
       if ($parent === undefined) {
-        this.findingDepth = 0
+        findingDepth = 0
         return false
       }
       let m = $parent[method]
       if (m && typeof m === 'function') {
-        this.findingDepth = 0
+        findingDepth = 0
         return m
       } else {
         if (this.findingDepth >= deep) {
-          this.findingDepth = 0
+          findingDepth = 0
           return false
         }
-        this.findingDepth++
-        return this.findParentMethod(method, $parent.$parent)
+        findingDepth++
+        return this.findParentMethod(method, $parent.$parent, deep, findingDepth)
       }
     }
   },

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <data-table api-url="/admin/api/users" :headers="headers"></data-table>
+    <data-table selectable api-url="/admin/api/users" :headers="headers" :actions="actions"></data-table>
   </div>
 </template>
 
@@ -14,16 +14,27 @@
           {
             id: 'id',
             label: 'ID',
-            width: 100
+            width: 100,
+            fixed: true
           },
           {
             id: 'nickname',
             label: '昵称',
-            render: this.renderName
+            render: this.renderName,
+            minWidth:100,
+            click: 'clickName'
           },
           {
             id: 'created_at',
             label: '创建时间',
+            minWidth:250
+          }
+        ],
+        actions:[
+          {
+            icon: 'el-icon-edit',
+            type: 'primary',
+            label: '编辑'
           }
         ]
       }
@@ -31,13 +42,10 @@
     components: {DataTable},
     methods: {
       renderName (name, row, h) {
-        return h('el-popover', {
-          props:{
-            trigger: 'hover'
-          }
-        }, [h('p', {
-          slot: 'reference'
-        }, name), row['mobile']])
+        return h('p', name)
+      },
+      clickName(name) {
+        console.log(name)
       }
     },
     mounted () {
