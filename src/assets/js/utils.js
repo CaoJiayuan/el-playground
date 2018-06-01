@@ -173,6 +173,15 @@ export function simpleClone(state) {
   return copy;
 }
 
+export function useAsFunction (value) {
+  if (typeof value === 'function') {
+    return value
+  }
+  return function () {
+    return value
+  }
+}
+
 
 
 export function Storage() {

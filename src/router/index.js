@@ -1,5 +1,6 @@
 import interceptor from '../assets/js/routerInterceptor';
 import Dashboard from '../pages/dashboard/Index';
+import Accounts from '../pages/accounts/Index';
 import Index from '../pages/Index';
 import Test from '../pages/Test';
 
@@ -15,9 +16,16 @@ const router = new VueRouter({
           path: '/',
           component: Dashboard,
           meta     : {
-            title: 'dashboard'
+            title: '首页'
           }
-        }
+        },
+        {
+          path: '/accounts',
+          component: Accounts,
+          meta     : {
+            title: '用户'
+          }
+        },
       ]
     },
     {

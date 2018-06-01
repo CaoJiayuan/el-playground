@@ -1,0 +1,43 @@
+@import "../../../../assets/style/vars"
+$close-size: 24px
+
+.app-tabs
+  height: $tab-size
+  position: fixed
+  top: 61px
+  left: $aside-width
+  z-index: 100
+  .tab-item
+    border-top-left-radius: 20px
+    border-top-right-radius: 10px
+    box-shadow: 0 -8px 20px 0px rgba(193, 193, 193, 0.2)
+    height: $tab-size
+    float: left
+    margin-right: 2px
+    background-color: #eeeeee
+    position: relative
+    transition: all 120ms ease-in-out
+    h4
+      text-align: center
+      line-height: $tab-size
+      color: gray
+      cursor: default
+    .close-tab
+      border-radius: 100%
+      font-size: $close-size
+      color: #ee9ca0
+      opacity: .3
+      position: absolute
+      right: ($tab-size - $close-size) / 2
+      top: ($tab-size - $close-size) / 2
+      &:hover
+        opacity: 1
+    &.active
+      z-index: 50
+      background-color: white
+      h4
+        color: #000
+      .close-tab
+        opacity: .7
+        &:hover
+          opacity: 1

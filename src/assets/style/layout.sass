@@ -5,15 +5,34 @@
 
 #content
   min-height: 100vh
+  background-color: #eeeeee
+  #main
+    position: relative
+    height: calc(100vh - 61px)
+    flex: 1
+    overflow: hidden
+    z-index: auto
+  .app-main
+    margin-top: $tab-size
+    height: 100%
+    overflow: auto
+    background-color: white
+    &::-webkit-scrollbar
+      width: 8px
+      height: 6px
+    &::-webkit-scrollbar-thumb
+      background: rgba(170, 170, 170, 0.51)
+      width: 3px
+      border-radius: 6px
+      &:hover
+        background: #8c8c8c
   .el-menu
     background-color: transparent !important
   &.fixed-aside
     #main
       margin-left: $aside-width
-      height: calc(100vh - 61px)
       border-top-left-radius: 10px
-      box-shadow: -1px -1px 20px rgba(127, 127, 127, 0.3)
-      z-index: 1
+      box-shadow: -1px 20px 20px rgba(127, 127, 127, 0.3)
     .app-aside
       height: 100%
       position: fixed

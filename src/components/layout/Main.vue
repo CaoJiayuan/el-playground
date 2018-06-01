@@ -1,19 +1,24 @@
 <template>
-<div v-theme="{ name: theme.name, type: 'content' }" id="content" :class="fixedAside ? 'fixed-aside': '' ">
+<div id="content" :class="fixedAside ? 'fixed-aside': '' ">
   <slot name="header">
   </slot>
 
   <el-container>
     <slot name="aside"></slot>
-    <el-main id="main" v-theme="{ name: theme.name, type: 'main' }">
-      <router-view />
-    </el-main>
+    <div id="main">
+      <app-tabs></app-tabs>
+      <el-main class="app-main">
+        <router-view />
+        <div class="placeholder-bar"></div>
+      </el-main>
+    </div>
   </el-container>
 </div>
 </template>
 
 <script>
   import themeable from '../../mixins/themeable'
+  import AppTabs from './content/tabs/index'
   export default {
     mixins:[themeable],
     props: {
@@ -26,7 +31,7 @@
     data() {
       return {};
     },
-    components: {},
+    components: {AppTabs},
     methods   : {},
     mounted() {
 
@@ -37,3 +42,9 @@
 
   };
 </script>
+
+<style lang="sass">
+.placeholder-bar
+  height: 46px
+  width: 100%
+</style>

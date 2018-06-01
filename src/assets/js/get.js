@@ -1,4 +1,4 @@
-import { Storage, httpQueryString } from '../app/utils'
+import { Storage, httpQueryString } from './utils'
 
 const storage = new Storage();
 

@@ -1,13 +1,24 @@
+import store from '../../store'
+
 const interceptor = (to, from, next) => {
-  setTitle(to);
+  setTitle(to)
+  setTab(to)
+  next()
+}
 
-  next();
-};
-
-function setTitle(route) {
-  let title = route.meta.title;
+function setTitle (route) {
+  let title = route.meta.title
   if (title) {
-    document.title = title;
+    document.title = title
   }
 }
-export default interceptor;
+
+function setTab (route) {
+  let title = route.meta.title
+  store.dispatch('routeTab', {
+    to: route.path,
+    title: title
+  })
+}
+
+export default interceptor

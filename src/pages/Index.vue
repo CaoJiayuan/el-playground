@@ -27,8 +27,10 @@
       </div>
     </div>
 
-    <el-aside class="app-aside" width="240px" slot="aside" v-theme="{name: theme.name, type: 'aside'}">
-      <el-menu v-theme="menu">
+    <el-aside class="app-aside" width="240px" slot="aside">
+      <el-menu v-theme="menu" router :default-active="$route.path">
+        <el-menu-item index="/" route="/"><i class="el-icon-menu"></i>首页</el-menu-item>
+        <el-menu-item index="/accounts" route="/accounts"><i class="el-icon-star-on"></i>用户</el-menu-item>
         <el-submenu index="1">
           <template slot="title"><i class="el-icon-message"></i>导航一</template>
           <el-menu-item-group>
@@ -92,10 +94,8 @@
     components: {LayoutMain},
     methods   : {},
     mounted() {
-
     },
     created() {
-
     },
 
   };
