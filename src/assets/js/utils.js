@@ -173,15 +173,25 @@ export function simpleClone(state) {
   return copy;
 }
 
-export function useAsFunction (value) {
+export function useAsFunction(value) {
   if (typeof value === 'function') {
-    return value
+    return value;
   }
   return function () {
-    return value
-  }
+    return value;
+  };
 }
 
+export function arrayChunk(array, perChunk) {
+  let c = 0;
+  let result = [];
+  let length = array.length;
+  do {
+    result.push(array.slice(c, c += perChunk));
+  } while (c < length);
+
+  return result;
+}
 
 
 export function Storage() {

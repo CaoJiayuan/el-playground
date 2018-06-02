@@ -4,3 +4,15 @@ axios.interceptors.request.use(config => {
   }
   return config;
 });
+
+
+axios.interceptors.response.use(undefined, error => {
+  if (error.response) {
+    if (ELEMENT) {
+      ELEMENT.Message({
+        message: error.response.data.message,
+        type: 'error'
+      })
+    }
+  }
+})

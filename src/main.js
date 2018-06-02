@@ -8,15 +8,17 @@ import theme from './directives/theme'
 
 require('./assets/js/request');
 
-
 Vue.config.productionTip = false;
 Vue.directive('theme', theme)
 Vue.use(Storage)
 /* eslint-disable no-new */
-new Vue({
+
+const vueApp = new Vue({
   el        : '#app',
   router,
   components: {App},
   template  : '<App/>',
   store
 });
+
+window.vueApp = vueApp;

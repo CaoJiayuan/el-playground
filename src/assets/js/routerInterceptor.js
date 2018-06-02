@@ -15,7 +15,8 @@ function setTitle (route) {
 
 function setTab (route) {
   let title = route.meta.title
-  store.dispatch('routeTab', {
+  let guest = route.meta.guest
+  guest || store.dispatch('routeTab', {
     to: route.path,
     title: title
   })

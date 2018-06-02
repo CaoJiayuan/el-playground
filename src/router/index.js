@@ -2,6 +2,7 @@ import interceptor from '../assets/js/routerInterceptor';
 import Dashboard from '../pages/dashboard/Index';
 import Accounts from '../pages/accounts/Index';
 import Index from '../pages/Index';
+import Login from '../pages/auth/login';
 import Test from '../pages/Test';
 
 
@@ -29,9 +30,13 @@ const router = new VueRouter({
       ]
     },
     {
-      path     : '/test',
-      name     : 'test',
-      component : Test
+      path     : '/login',
+      name     : 'login',
+      meta     : {
+        title: '登陆',
+        guest: true
+      },
+      component : Login
     }
   ]
 });

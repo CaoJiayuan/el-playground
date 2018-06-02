@@ -1,5 +1,5 @@
 @import "../../../../assets/style/vars"
-$close-size: 24px
+$close-size: 18px
 
 .app-tabs
   height: $tab-size
@@ -8,7 +8,7 @@ $close-size: 24px
   left: $aside-width
   z-index: 100
   .tab-item
-    border-top-left-radius: 20px
+    border-top-left-radius: 10px
     border-top-right-radius: 10px
     box-shadow: 0 -8px 20px 0px rgba(193, 193, 193, 0.2)
     height: $tab-size
@@ -30,8 +30,11 @@ $close-size: 24px
       position: absolute
       right: ($tab-size - $close-size) / 2
       top: ($tab-size - $close-size) / 2
+      text-align: center
       &:hover
         opacity: 1
+        background-color: rgba(250, 128, 115, 0.53)
+        color: white
     &.active
       z-index: 50
       background-color: white
