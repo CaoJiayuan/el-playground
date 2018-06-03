@@ -25,18 +25,34 @@
     flex: 1
     overflow: hidden
     z-index: auto
+    transition: margin 180ms ease-in-out
   .app-main
     margin-top: $tab-size
     height: 100%
     overflow: auto
     background-color: white
+    .app-footer
+      position: relative
+      text-align: center
+      color: gray
+      margin: 10px 0
+      text-shadow: 0 1px 1px #d4bad0
+      &::before
+        content: ''
+        width: 240px
+        height: 1px
+        background-color: #ebebeb
+        position: absolute
+        transform: translateX(-50%)
+        left: 50%
+        top: -6px
   .el-menu
     background-color: transparent !important
   &.fixed-aside
     #main
       margin-left: $aside-width
       border-top-left-radius: 10px
-      box-shadow: -1px 20px 20px rgba(127, 127, 127, 0.3)
+      box-shadow: -1px 20px 12px rgba(0, 0, 0, 0.1)
     .app-aside
       height: 100%
       position: fixed

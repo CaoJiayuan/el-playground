@@ -1,18 +1,26 @@
 import Form from '../../components/form';
-
+import UserApi from './UserApi'
 require('./login.sass');
+
 export default {
   name      : 'app-login',
   data() {
     return {
-      post: {}
+      post: {},
+      loading: false
     };
   },
   components: {Form},
   methods   : {
     login() {
-      console.log(this.post);
-      this.$router.push('/')
+      this.loading = true
+      UserApi.login(this.post).then(re => this.loading = false).then(re => this.$router.push('/')).catch(err => {
+        this.loading = false
+        this.$message({
+          type: 'error',
+          message: err.response.data.message
+        })
+      })
     },
     renderForm(h) {
       return h(Form, {
@@ -35,10 +43,10 @@ export default {
     }
   },
   render(h) {
-
     let login = h('el-button', {
       props: {
-        type: 'primary'
+        type: 'primary',
+        loading: this.loading
       },
       on: {
         click: this.login
@@ -62,7 +70,7 @@ export default {
     }, [title, f, login]);
 
     return h('el-container', {
-      class: 'app-login'
+      class: 'app-login',
     }, [h('el-row', {
       style: {
         width: '100%',

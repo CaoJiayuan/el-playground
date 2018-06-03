@@ -4,10 +4,7 @@ const mapGetters = Vuex.mapGetters
 const mapActions = Vuex.mapActions
 export default {
   props:{
-    asideWidth: {
-      type:Number,
-      default: () => 240
-    }
+
   },
   name: 'app-tabs',
   data(){
@@ -22,7 +19,8 @@ export default {
       class: 'app-tabs',
       ref: 'content',
       style: {
-        width: this.mainWidth + 'px'
+        width: this.mainWidth + 'px',
+        left: this.asideWidth + 'px'
       }
     }, tabs)
   },
@@ -89,10 +87,14 @@ export default {
   },
   computed: {
     ...mapGetters({
-      tabs: 'tabs'
+      tabs: 'tabs',
+      nav: 'nav',
     }),
     mainWidth () {
       return this.bodyWidth - this.asideWidth
+    },
+    asideWidth(){
+      return this.nav.collapse ? 64 : 240
     }
   },
   beforeDestroy(){

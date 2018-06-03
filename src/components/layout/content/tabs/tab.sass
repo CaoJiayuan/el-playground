@@ -5,18 +5,19 @@ $close-size: 18px
   height: $tab-size
   position: fixed
   top: 61px
-  left: $aside-width
   z-index: 100
+  transition: left 180ms ease-in-out
   .tab-item
     border-top-left-radius: 10px
     border-top-right-radius: 10px
-    box-shadow: 0 -8px 20px 0px rgba(193, 193, 193, 0.2)
+    box-shadow: 0 -8px 12px 0px rgba(128, 128, 128, 0.1)
     height: $tab-size
     float: left
     margin-right: 2px
     position: relative
-    transition: all 120ms ease-in-out
-    opacity: .75
+    transition: width 180ms ease-in-out
+    opacity: .5
+    background-color: white
     h4
       text-align: center
       line-height: $tab-size
@@ -37,7 +38,6 @@ $close-size: 18px
         color: white
     &.active
       z-index: 50
-      background-color: white
       opacity: 1
       h4
         color: #000

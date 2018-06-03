@@ -1,6 +1,6 @@
 <template>
   <div>
-    <data-table selectable api-url="/admin/api/users" :headers="headers" :actions="actions"></data-table>
+    <data-table selectable api-url="/users" :headers="headers" :actions="actions"></data-table>
   </div>
 </template>
 
