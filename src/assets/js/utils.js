@@ -193,6 +193,17 @@ export function arrayChunk(array, perChunk) {
   return result;
 }
 
+export function arrayWrap(value) {
+  if (!value instanceof Array){
+    return [value]
+  }
+
+  return value
+}
+
+export function inArray(needle, haystack) {
+ return arrayWrap(haystack).indexOf(needle) > -1
+}
 
 export function Storage() {
 
