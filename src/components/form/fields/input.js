@@ -3,16 +3,21 @@ import {inArray} from '../../../assets/js/utils';
 export default {
   name    : 'app-input',
   props   : {
-    type : {
+    type       : {
       type   : String,
       default: () => 'text'
     },
-    value: [String, Array, Number, Object, Date]
+    value      : [String, Array, Number, Object, Date],
+    placeholder: {
+      type   : String,
+      default: () => null
+    }
   },
   data() {
     return {
       datetime  : new Date(),
       dateRanges: '',
+      time      : '12:00:00'
     };
   },
   computed: {
@@ -33,10 +38,14 @@ export default {
   methods : {
     renderTextInputs(h) {
       let props = this.mergedProps;
+
       return h('el-input', {
         props,
         on: {
-          input: this.inputEvent
+          input: this.inputEvent,
+        },
+        attrs: {
+          placeholder : this.placeholder
         }
       });
     },
@@ -45,10 +54,29 @@ export default {
         return this.renderDateTime(h);
       } else if (this.inType(['daterange', 'datetimerange'])) {
         return this.renderDateTimeRange(h);
+      } else if (this.inType(['time', 'timerange'])) {
+        return this.renderTime(h);
       }
     },
     renderTime(h) {
+      this.datetime = this.value;
+      let props = this.mergedProps;
 
+      props['valueFormat'] = 'HH:mm:ss';
+      props = Object.assign(props, {
+        value: this.time
+      });
+
+      return h('el-time-picker', {
+        props,
+        on: {
+          input: v => {
+            this.$emit('input', v);
+            this.time = v;
+            return v;
+          }
+        }
+      });
     },
 
     renderDateTime(h) {

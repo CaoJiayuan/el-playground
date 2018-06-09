@@ -4,7 +4,7 @@
   <el-date-picker v-model="time" type="datetime"></el-date-picker>
   <el-button type="primary" @click="form = true">Form</el-button>
   <el-dialog :visible.sync="form" title="Form example">
-    <app-form labelWidth="120" v-model="post" :fields="fields" :columns="1"></app-form>
+    <app-form labelWidth="80" v-model="post" :fields="fields" :columns="2"></app-form>
     <el-button @click="save">Ok</el-button>
   </el-dialog>
 </div>
@@ -16,35 +16,41 @@
     data() {
       return {
         post: {
-          title: 'A random title',
-          summary: 'Summary line1\nLine 2',
-          created_at: new Date(),
-          time_range: ['2018-06-25 12:12:12', '2018-06-30 12:12:12']
+
         },
         fields: [
           {
             label: 'Title',
-            type: 'input',
+            type: 'input.textarea',
             id: 'title',
             props: {
               clearable: true
-            }
+            },
+            span: 2
           },
           {
             label: 'Summary',
-            type: 'input.textarea',
+            type: 'input',
             id: 'summary',
+            span: 2,
+            props: {
+              clearable: true,
+            }
           },
           {
             label: 'Datetime',
-            type: 'input.datetime',
+            type: 'input',
             id: 'created_at',
-            default: new Date(),
           },
           {
             label: 'Datetime range',
-            type: 'input.datetimerange',
+            type: 'input',
             id: 'time_range'
+          },
+          {
+            label: 'Time',
+            type: 'input',
+            id: 'time'
           },
         ],
         form: false,

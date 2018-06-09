@@ -1,25 +1,25 @@
 import {arrayChunk} from '../../assets/js/utils';
 import input from './fields/input';
-
+require('./form.sass')
 export default {
   name    : 'app-form',
   props   : {
-    value  : {
+    value     : {
       type   : Object,
       default: () => {
         return {};
       }
     },
-    fields : {
+    fields    : {
       type   : Array,
       default: () => []
     },
-    columns: {
+    columns   : {
       type   : Number,
       default: () => 1
     },
     labelWidth: {
-      type: [Number, String],
+      type   : [Number, String],
       default: () => 80
     }
   },
@@ -31,6 +31,25 @@ export default {
       set(v) {
         this.$emit('input', v);
       }
+    },
+    groupedFields() {
+      let result = [];
+      let col = 0, fs = this.fields.length;
+      result[0] = [];
+      for (let i = 0; i < fs; i++) {
+        let field = this.fields[i];
+        field.span = field.span || 1;
+        field.span > this.columns && (field.span = this.columns);
+        let index = result.length - 1;
+        if (col + field.span > this.columns) {
+          result[index + 1] = [field];
+          col = field.span;
+          continue;
+        }
+        result[index].push(field);
+        col += field.span;
+      }
+      return result;
     }
   },
   data() {
@@ -38,14 +57,15 @@ export default {
       types: {
         input
       },
-      data: null
+      data : null
     };
   },
   render(h) {
     return h('el-form', {
       props: {
-        labelWidth: `${this.labelWidth}px`
-      }
+        labelWidth: `${this.labelWidth}px`,
+      },
+      class: 'app-form'
     }, this.renderFields(h));
   },
   mounted() {
@@ -53,7 +73,7 @@ export default {
   },
   methods : {
     renderFields(h) {
-      const chunks = arrayChunk(this.fields, this.columns);
+      const chunks = this.groupedFields
 
       return chunks.map(row => {
         let columns = row.map(col => {
@@ -76,14 +96,15 @@ export default {
       }
       let props = field.props || {};
 
-      this.post[field.id] === undefined && (this.post[field.id] = field.default)
+      this.post[field.id] === undefined && (this.post[field.id] = field.default);
 
       let el = h(com, {
-        props : {
+        props: {
           type : type ? type.split('.', 2)[1] : undefined,
-          value: this.post[field.id]
+          value: this.post[field.id],
+          placeholder: field.placeholder ? field.placeholder : `请输入${field.label}`
         },
-        on: {
+        on   : {
           input: v => {
             this.post[field.id] = v;
           }
