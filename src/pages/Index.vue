@@ -16,8 +16,8 @@
         <el-menu-item index="4">订单管理</el-menu-item>
       </el-menu>
       <div class="theme" style="right: 20px;position: absolute;top: 13px;">
-        <el-button circle style="background: red" ></el-button>
-        <el-button circle style="background: grey" ></el-button>
+        <!--<el-button circle style="background: red" ></el-button>-->
+        <!--<el-button circle style="background: grey" ></el-button>-->
         <el-button size="mini" @click="logout">退出</el-button>
       </div>
     </div>

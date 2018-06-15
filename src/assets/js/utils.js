@@ -2,6 +2,7 @@ let timer = null;
 let flattened = [];
 
 let storage = localStorage || sessionStorage;
+let coverId = 'cover-' + fastRandom();
 
 require('./polyfill');
 
@@ -203,6 +204,31 @@ export function arrayWrap(value) {
 
 export function inArray(needle, haystack) {
  return arrayWrap(haystack).indexOf(needle) > -1
+}
+
+export function getMaxZIndex () {
+  let arr = [...document.all].map(e => +window.getComputedStyle(e).zIndex || 0)
+  return arr.length ? Math.max(...arr) : 0
+}
+
+export function cover () {
+  let box = document.getElementById(coverId);
+  if (box === null) {
+    box = document.createElement('div');
+    box.id = coverId
+    box.setAttribute('class', 'app-cover');
+    document.body.appendChild(box);
+    box.style.zIndex = getMaxZIndex() + 1
+  } else {
+    box.style.display = 'block'
+  }
+}
+
+export function uncover () {
+  let box = document.getElementById(coverId);
+  if (box !== null) {
+    box.style.display = 'none'
+  }
 }
 
 export function Storage() {

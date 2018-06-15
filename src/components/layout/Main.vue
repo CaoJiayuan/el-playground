@@ -40,6 +40,7 @@
     },
     data() {
       return {
+        usingTabs: true
       };
     },
     components: {AppTabs},
