@@ -1,4 +1,6 @@
 import Api from './Api'
+import color from '../../../mixins/color';
+import {COLLAPSE_KEY} from '../../../constants'
 
 require('./aside.sass')
 
@@ -10,21 +12,29 @@ export default {
       nav: 'nav'
     })
   },
+  mixins :[color],
   mounted(){
     Api.loadNav().then(nav => this.$store.dispatch('loadNav', nav))
+    this.$store.commit('toggleCollapse', {collapse: this.$storage.get(COLLAPSE_KEY, false)})
   },
   render(h){
     const items = h('el-menu', {
       props: {
         router: true,
         defaultActive: this.$route.path,
-        collapse: this.nav.collapse
+        collapse: this.nav.collapse,
+        backgroundColor: this.backColor,
+        textColor : this.frontColor,
+        activeTextColor : this.accentColor
       }
     }, this.renderItems(h))
     return h('el-aside', {
       class: 'app-aside',
       props: {
-        width: '240px'
+        width: this.nav.collapse ? '64px' : '240px',
+      },
+      style:{
+        backgroundColor: this.backColor
       }
     }, [items])
   },

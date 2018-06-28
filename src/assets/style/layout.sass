@@ -27,7 +27,7 @@ body
     flex: 1
     overflow: hidden
     z-index: auto
-    transition: margin 180ms ease-in-out
+    transition: margin $duration ease-in-out
   .app-main
     margin-top: $tab-size
     height: 100%
@@ -53,8 +53,8 @@ body
   &.fixed-aside
     #main
       margin-left: $aside-width
-      border-top-left-radius: 10px
       box-shadow: -1px 20px 12px rgba(0, 0, 0, 0.1)
+      transition: $color-transition
     .app-aside
       height: 100%
       position: fixed

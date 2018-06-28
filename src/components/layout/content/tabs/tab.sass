@@ -1,16 +1,16 @@
 @import "../../../../assets/style/vars"
 $close-size: 18px
-
+$radius: 3px
 .app-tabs
   height: $tab-size
   position: fixed
   top: 61px
   z-index: 100
-  transition: left 180ms ease-in-out
+  transition: left $duration ease-in-out
+  background-color: transparent
   .tab-item
-    border-top-left-radius: 10px
-    border-top-right-radius: 10px
-    box-shadow: 0 -8px 12px 0px rgba(128, 128, 128, 0.1)
+    border-top-left-radius: $radius
+    border-top-right-radius: $radius
     height: $tab-size
     float: left
     margin-right: 2px
@@ -38,7 +38,7 @@ $close-size: 18px
         color: white
     &.active
       z-index: 50
-      opacity: 1
+      opacity: .95
       h4
         color: #000
       .close-tab

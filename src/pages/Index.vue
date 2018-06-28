@@ -1,27 +1,13 @@
 <template>
   <layout-main>
-    <div class="app-menu" slot="header">
-      <div class="profile">
+    <div class="app-menu" slot="header" :style="{backgroundColor: theme.back, color: theme.front}">
+      <div class="profile" :style="{backgroundColor: theme.back, color: theme.front, width: nav.collapse ? '24px' : '200px'}">
         <h2>A vue admin</h2>
       </div>
-      <el-menu mode="horizontal">
-        <el-submenu index="2">
-          <template slot="title">个人中心</template>
-          <el-menu-item index="2-1">修改密码</el-menu-item>
-          <el-menu-item index="2-2">选项2</el-menu-item>
-          <el-menu-item index="2-3">选项3</el-menu-item>
-        </el-submenu>
-        <el-menu-item index="1">处理中心</el-menu-item>
-        <el-menu-item index="3">消息中心</el-menu-item>
-        <el-menu-item index="4">订单管理</el-menu-item>
-      </el-menu>
-      <div class="theme" style="right: 20px;position: absolute;top: 13px;">
-        <el-button circle style="background: red" ></el-button>
-        <el-button circle style="background: grey" ></el-button>
-        <el-button size="mini" @click="logout">退出</el-button>
-      </div>
+      <div @click="toggleNav" class="toggle-nav" :style="{backgroundColor: theme.back, color: theme.front}"><i class="fa fa-bars"></i></div>
+      <app-menu :back-color="theme.back" :front-color="theme.front"></app-menu>
     </div>
-    <app-aside slot="aside"></app-aside>
+    <app-aside slot="aside" :back-color="theme.back" :front-color="theme.front"></app-aside>
   </layout-main>
 </template>
 
@@ -30,8 +16,10 @@
   import themeable from "../mixins/themeable";
   import AppAside from "../components/layout/aside/index";
   import UserApi from "./auth/UserApi";
+  import AppMenu from "../components/layout/menu/index";
 
   const mapMutations = Vuex.mapMutations
+  const mapGetters = Vuex.mapGetters
 
   export default {
     mixins    : [themeable],
@@ -39,6 +27,7 @@
       return {};
     },
     components: {
+      AppMenu,
       AppAside,
       LayoutMain
     },
@@ -49,6 +38,11 @@
       logout(){
         UserApi.logout().then(r => this.$router.push('/login'))
       }
+    },
+    computed:{
+      ...mapGetters({
+        nav : 'nav'
+      })
     },
     mounted() {
 
@@ -63,16 +57,26 @@
 
   .app-menu
     position: relative
+    transition: $color-transition
     .el-menu
-      margin-left: $aside-width
       border: none
     .profile
       float: left
-      height: 100%
+      height: 61px
       line-height: 61px
       padding: 0 20px
-
+      transition: width $duration ease-in-out, $color-transition
+    .toggle-nav
+      float: left
+      width: 64px
+      height: 61px
+      line-height: 61px
+      text-align: center
+      font-size: 24px
+      cursor: pointer
+      transition: $color-transition
   .app-aside
+    transition: $color-transition
     .el-menu
       border: none
 </style>

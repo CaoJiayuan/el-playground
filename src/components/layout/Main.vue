@@ -5,7 +5,7 @@
 
   <el-container>
     <slot name="aside"></slot>
-    <div id="main" :style="{marginLeft : nav.collapse ? '64px': '240px'}">
+    <div id="main" :style="{marginLeft : nav.collapse ? '64px': '240px', backgroundColor: theme.back}">
       <app-tabs></app-tabs>
       <el-main class="app-main">
         <router-view />
@@ -16,12 +16,14 @@
       </el-main>
     </div>
   </el-container>
+  <app-theme></app-theme>
 </div>
 </template>
 
 <script>
   import themeable from '../../mixins/themeable'
   import AppTabs from './content/tabs/index'
+  import AppTheme from "../theme/index";
   const mapGetters = Vuex.mapGetters
 
   export default {
@@ -42,7 +44,9 @@
       return {
       };
     },
-    components: {AppTabs},
+    components: {
+      AppTheme,
+      AppTabs},
     methods   : {},
     mounted() {
 
