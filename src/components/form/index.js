@@ -96,7 +96,8 @@ export default {
       }
       let props = field.props || {};
 
-      this.post[field.id] === undefined && (this.post[field.id] = field.default);
+      this.post[field.id] === undefined && (this.post[field.id] = _.clone(field.default));
+
 
       let el = h(com, {
         props: {

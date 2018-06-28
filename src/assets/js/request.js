@@ -25,12 +25,12 @@ function renderException(response) {
     if (isDev && response.status >= 500) {
       const handler = new Handler(response.data)
       handler.render();
+    } else {
+      ele.Message({
+        message: response.data.message,
+        center : true,
+        type   : 'error'
+      });
     }
-
-    ele.Message({
-      message: response.data.message,
-      center : true,
-      type   : 'error'
-    });
   }
 }

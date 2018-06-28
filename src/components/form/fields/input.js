@@ -13,11 +13,16 @@ export default {
       default: () => null
     }
   },
+  model:{
+    event: 'input',
+    prop: 'value'
+  },
   data() {
     return {
       datetime  : new Date(),
       dateRanges: '',
-      time      : '12:00:00'
+      time      : '12:00:00',
+      timeDirty : false
     };
   },
   computed: {
@@ -101,19 +106,20 @@ export default {
     },
 
     renderDateTimeRange(h) {
-      this.dateRanges = this.value;
+      if (this.value instanceof Array && this.value.length === 2 && !this.timeDirty) {
+        this.dateRanges = this.value;
+      }
       let props = this.mergedProps;
       props['valueFormat'] = 'yyyy-MM-dd HH:mm:ss';
-      props = Object.assign(props, {
-        value: this.dateRanges
-      });
+      props.value = this.dateRanges
 
       return h('el-date-picker', {
         props,
         on: {
           input: v => {
             this.$emit('input', v);
-            this.dateRanges = v;
+            this.dateRanges = _.clone(v);
+            this.timeDirty = true
             return v;
           }
         }

@@ -4,7 +4,7 @@
   <el-date-picker v-model="time" type="datetime"></el-date-picker>
   <el-button type="primary" @click="form = true">Form</el-button>
   <el-dialog :visible.sync="form" title="Form example">
-    <app-form labelWidth="80" v-model="post" :fields="fields" :columns="2"></app-form>
+    <app-form labelWidth="80" v-model="post" :fields="fields"></app-form>
     <el-button @click="save">Ok</el-button>
   </el-dialog>
 </div>
@@ -26,7 +26,6 @@
             props: {
               clearable: true
             },
-            span: 2
           },
           {
             label: 'Summary',
@@ -39,8 +38,9 @@
           },
           {
             label: 'Datetime',
-            type: 'input',
+            type: 'input.datetimerange',
             id: 'created_at',
+            default: ['2018-02-25 12:12:12', '2018-02-26 12:12:12']
           },
           {
             label: 'Datetime range',
@@ -49,7 +49,7 @@
           },
           {
             label: 'Time',
-            type: 'input',
+            type: 'input.time',
             id: 'time'
           },
         ],
@@ -76,7 +76,6 @@
       }
     },
     mounted() {
-
     },
     created() {
 

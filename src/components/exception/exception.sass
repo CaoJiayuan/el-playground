@@ -1,8 +1,27 @@
 .app-exception
   height: 100%
+  .ex-tip
+    position: absolute
+    left: 10px
+    top: 15px
+    background-color: #d6abad
+    border-radius: 10px
+    font-size: 12px
+    color: red
+    padding: 0 10px
+  .ex-msg
+    height: 48px
+    text-align: center
+    color: #fff
+    background-color: #ff4f54
   .ex-trace
-    max-height: 75%
+    max-height: calc(100% - 28px)
     overflow-y: scroll
+    padding: 10px 5px
     li
       padding: 5px 10px
       list-style: none
+      &:hover
+        color: #9f9f9f
+        cursor: default
+

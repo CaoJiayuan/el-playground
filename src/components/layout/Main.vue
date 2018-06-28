@@ -42,6 +42,7 @@
     },
     data() {
       return {
+        usingTabs: true
       };
     },
     components: {
