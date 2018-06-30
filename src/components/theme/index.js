@@ -70,7 +70,9 @@ export default {
       }, ths)
     });
 
-    const container = h('el-container', {}, themes);
+    const container = h('div', {
+      class: 'app-theme-box'
+    }, themes);
 
     return h('el-popover', {
       props: {

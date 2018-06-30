@@ -9,6 +9,11 @@ const navs = [
     display_name: '用户',
     icon: 'el-icon-star-on',
   },
+  {
+    path: '/editor',
+    display_name: '文本编辑',
+    icon: 'el-icon-edit',
+  },
 ]
 const Api = {
   loadNav(){

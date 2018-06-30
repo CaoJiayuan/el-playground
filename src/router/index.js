@@ -1,6 +1,7 @@
 import interceptor from '../assets/js/routerInterceptor';
 import Dashboard from '../pages/dashboard/Index';
 import Accounts from '../pages/accounts/Index';
+import Editor from '../pages/editor/Index';
 import Index from '../pages/Index';
 import Login from '../pages/auth/login';
 
@@ -22,6 +23,13 @@ const routes = [
         component: Accounts,
         meta     : {
           title: '用户'
+        }
+      },
+      {
+        path: '/editor',
+        component: Editor,
+        meta     : {
+          title: '文本编辑'
         }
       },
     ]

@@ -5,9 +5,9 @@
         <h2>A vue admin</h2>
       </div>
       <div @click="toggleNav" class="toggle-nav" :style="{backgroundColor: theme.back, color: theme.front}"><i class="fa fa-bars"></i></div>
-      <app-menu :back-color="theme.back" :front-color="theme.front"></app-menu>
+      <app-menu :back-color="theme.back" :front-color="theme.front" :accent-color="theme.accent"></app-menu>
     </div>
-    <app-aside slot="aside" :back-color="theme.back" :front-color="theme.front"></app-aside>
+    <app-aside slot="aside" :back-color="theme.back" :front-color="theme.front" :accent-color="theme.accent"></app-aside>
   </layout-main>
 </template>
 

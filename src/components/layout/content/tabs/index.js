@@ -62,12 +62,13 @@ export default {
 
         let title = h('h4', tab.title)
 
+        let padding = this.tabs.length > 1 ? 2 : 0;
         tabs.push(h('div', {
           class: ['tab-item', {
             'active': tab.active
           }],
           style: {
-            width: ((this.mainWidth / length) - 2) + 'px'
+            width: ((this.mainWidth / length) - padding) + 'px'
           },
           on:{
             click: e => {
