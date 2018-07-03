@@ -4,8 +4,10 @@ import App from './App';
 import {router} from './router';
 import {Storage} from './assets/js/utils'
 import store from './store'
+require('./mock');
 
 require('./assets/js/request');
+
 
 Vue.config.productionTip = false;
 Vue.use(Storage)

@@ -26,7 +26,7 @@ body
     flex: 1
     overflow: hidden
     z-index: auto
-    transition: margin $duration ease-in-out
+    transition: margin-left $duration ease-in-out, $color-transition
   .app-main
     margin-top: $tab-size
     height: 100%
@@ -47,13 +47,23 @@ body
         transform: translateX(-50%)
         left: 50%
         top: -6px
+    .app-notification
+      margin-bottom: 15px
+      position: relative
+      display: inline-block
+      width: 100%
+      .el-alert:not(:first-child)
+        position: relative
+        margin-top: -34px
+        margin-left: -4px
+        box-shadow: 1px -1px 1px rgba(0, 0, 0, 0.11)
   .el-menu
     background-color: transparent !important
   &.fixed-aside
     #main
       margin-left: $aside-width
       box-shadow: -1px 20px 12px rgba(0, 0, 0, 0.1)
-      transition: $color-transition
+      transition: margin-left $duration ease-in-out, $color-transition
     .app-aside
       height: 100%
       position: fixed
