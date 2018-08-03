@@ -44,7 +44,7 @@ export default {
         activeTextColor : this.accentColor
       },
       style: {
-        marginLeft: this.nav.collapse ? '128px' : '304px'
+        marginLeft: '64px'
       }
     }, items);
   }

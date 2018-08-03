@@ -1,11 +1,10 @@
 <template>
 <div id="content" :class="fixedAside ? 'fixed-aside': '' " :style="{backgroundColor: theme.back}">
-  <slot name="header">
-  </slot>
-
   <el-container>
     <slot name="aside"></slot>
     <div id="main" :style="{marginLeft : nav.collapse ? '64px': '240px', backgroundColor: theme.back}">
+      <slot name="header">
+      </slot>
       <app-tabs></app-tabs>
       <el-main class="app-main">
         <div class="app-notification">

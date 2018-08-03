@@ -1,11 +1,11 @@
 <template>
   <layout-main>
     <div class="app-menu" slot="header" :style="{backgroundColor: theme.back, color: theme.front}">
-      <div class="profile" :style="{backgroundColor: theme.back, color: theme.front, width: nav.collapse ? '24px' : '200px'}">
-        <h2>A vue admin</h2>
-      </div>
+      <!--<div class="profile" :style="{backgroundColor: theme.back, color: theme.front, width: nav.collapse ? '24px' : '200px'}">-->
+        <!--<h2>A vue admin</h2>-->
+      <!--</div>-->
       <div @click="toggleNav" class="toggle-nav" :style="{backgroundColor: theme.back, color: theme.front}"><i class="fa fa-bars"></i></div>
-      <app-menu :back-color="theme.back" :front-color="theme.front" :accent-color="theme.accent"></app-menu>
+      <app-menu v-if="showMenu" :back-color="theme.back" :front-color="theme.front" :accent-color="theme.accent"></app-menu>
     </div>
     <app-aside slot="aside" :back-color="theme.back" :front-color="theme.front" :accent-color="theme.accent"></app-aside>
   </layout-main>
@@ -42,7 +42,10 @@
     computed:{
       ...mapGetters({
         nav : 'nav'
-      })
+      }),
+      showMenu(){
+        return true
+      }
     },
     mounted() {
 

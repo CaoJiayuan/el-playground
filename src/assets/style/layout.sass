@@ -22,7 +22,7 @@ body
   background-color: #eeeeee
   #main
     position: relative
-    height: calc(100vh - 61px)
+    height: 100vh
     flex: 1
     overflow: hidden
     z-index: auto
@@ -62,8 +62,13 @@ body
   &.fixed-aside
     #main
       margin-left: $aside-width
-      box-shadow: -1px 20px 12px rgba(0, 0, 0, 0.1)
+      //box-shadow: -1px 20px 12px rgba(0, 0, 0, 0.1)
       transition: margin-left $duration ease-in-out, $color-transition
+      #app-view
+        height: 100%
+      #app-content
+        overflow: scroll
+        height: 100%
     .app-aside
       height: 100%
       position: fixed
